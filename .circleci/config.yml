@@ -5,10 +5,10 @@ orbs:
 jobs:
   my-ias-job:
     executor: hello-but-actually-ias/default
-    commands:
-    - echo "Hello, IAS"
-    - hello-triggerer
-    - echo "Goobye, IAS"
+    steps:
+    - run: echo "Hello, IAS"
+    - hello-but-actually-ias/hello-triggerer
+    - run: echo "Goobye, IAS"
 
 workflows:
   hello-ias-workflow:
