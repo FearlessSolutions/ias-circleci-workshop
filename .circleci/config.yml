@@ -2,8 +2,15 @@ version: 2.1
 
 orbs:
   hello-but-actually-ias: circleci/hello-build@0.0.13
+jobs:
+  my-ias-job:
+    executor: hello-but-actually-ias/default
+    commands:
+    - echo "Hello, IAS"
+    - hello-triggerer
+    - echo "Goobye, IAS"
 
 workflows:
   hello-ias-workflow:
     jobs:
-    - hello-but-actually-ias/hello-build
+    - my-ias-job
