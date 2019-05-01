@@ -10,6 +10,7 @@ orbs:
       goodbye-ias:
         steps:
           - run: echo "Goobye, IAS orb"
+  jq: circleci/jq@1.6.1
 commands:
   hello-ias:
     steps:
@@ -19,14 +20,12 @@ commands:
       - run: echo "Goobye, IAS command"
 jobs:
   my-ias-job:
-    executor: hello-but-actually-ias/default
+    executor: hello-but-actually-ias/default # Kick this off with <whatever hello-build/default says> container
     steps:
-    - run: echo "Hello, IAS"
-    - hello-ias
-    - ias-stuff/hello-ias
-    - hello-but-actually-ias/hello-triggerer
-    - ias-stuff/goodbye-ias
-    - goodbye-ias
+    - run: echo "Hello, IAS; gonna install jq"
+    - jq/install
+    - run: |
+        echo '{"foo": "bar"}' | jq .
     - run: echo "Goobye, IAS"
 
 workflows:
