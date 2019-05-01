@@ -2,12 +2,31 @@ version: 2.1
 
 orbs:
   hello-but-actually-ias: circleci/hello-build@0.0.13
+  ias-stuff:
+    commands:
+      hello-ias:
+        steps:
+          - run: echo "Hello, IAS orb"
+      goodbye-ias:
+        steps:
+          - run: echo "Goobye, IAS orb"
+commands:
+  hello-ias:
+    steps:
+      - run: echo "Hello, IAS command"
+  goodbye-ias:
+    steps:
+      - run: echo "Goobye, IAS command"
 jobs:
   my-ias-job:
     executor: hello-but-actually-ias/default
     steps:
     - run: echo "Hello, IAS"
+    - hello-ias
+    - ias-stuff/hello-ias
     - hello-but-actually-ias/hello-triggerer
+    - ias-stuff/goodbye-ias
+    - goodbye-ias
     - run: echo "Goobye, IAS"
 
 workflows:
